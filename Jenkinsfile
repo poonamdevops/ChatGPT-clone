@@ -6,7 +6,7 @@ pipeline {
         stage("Clone Code") {
             agent {
                 node {
-                    label 'master && dockerBuild' 
+                    label 'dockerBuild' 
                 }
             }
             steps{
