@@ -1,9 +1,16 @@
 pipeline {
-    agent none
+    agent any
     
     stages {
+
+        stage("Clone Code on dockerBuild") {
+            steps{
+                echo "Cloning the code"
+                git url:"https://github.com/SANDEEP-NAYAK/django-GPT-3.5-ChatBot.git", branch: "master"
+            }
+        }
         
-        stage("Clone Code") {
+        stage("Clone Code on dockerBuild") {
             agent {
                 node {
                     label 'dockerBuild' 
