@@ -6,9 +6,18 @@ from django.contrib import auth
 from .models import Chat
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
-import creds
+from cryptography.fernet import Fernet
 
-openai.api_key = creds.api_key
+key = '84mZqDjCLLFHzTcSBITkW3Ut3NB-GWp0qmUhQNt6mXs='
+
+f = Fernet(key)
+
+encrypted_data = b'gAAAAABlBvA2zGxIL8MgQcEvDH0T_sHz8wBtGG1s2opil5MiNC0lGN5P62-YrKsHrZpgEB_ax-Wgyfs29yzsaDQ1daYCpp3u_OMDM0UJKtrKXtLxTkPRQOajioyOLSN2vkNXtptDAc-cF15BZl9kO3ZleQ2xCT0aKQ=='
+
+decrypted_data = f.decrypt(encrypted_data)
+
+
+openai.api_key = decrypted_data.decode()
 
 def ask_openai(message):
     reponse = openai.ChatCompletion.create(
