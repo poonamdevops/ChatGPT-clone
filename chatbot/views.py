@@ -6,9 +6,9 @@ from django.contrib import auth
 from .models import Chat
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
+import creds
 
-openai_api_key = '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'
-openai.api_key = openai_api_key
+openai.api_key = creds.api_key
 
 def ask_openai(message):
     reponse = openai.ChatCompletion.create(
