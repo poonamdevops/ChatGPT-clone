@@ -11,7 +11,7 @@ pipeline {
             }
             steps{
                 echo "Cloning the code"
-                git url:"https://github.com/SANDEEP-NAYAK/django-GPT-3.5-ChatBot.git", branch: "master"
+                git url:'https://github.com/SANDEEP-NAYAK/django-GPT-3.5-ChatBot.git', branch: 'master'
             }
         }
             
@@ -23,7 +23,8 @@ pipeline {
             }
             steps{
                 echo "Building the image"
-                sh "docker build -t aichatbot ."
+                sh 'docker build -t aichatbot:$BUILD_ID .'
+                sh 'docker image tag aichatbot:$BUILD_ID sandeepdarkworld/aichatbot:$BUILD_ID'
             }
         }
     }
