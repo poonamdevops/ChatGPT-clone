@@ -24,7 +24,7 @@ pipeline {
             steps{
                 echo "Building the image"
                 sh 'docker build -t aichatbot:$BUILD_ID .'
-                sh 'docker image tag aichatbot:$BUILD_ID sandeepdarkworld/aichatbot:$BUILD_ID'
+                // sh 'docker image tag aichatbot:$BUILD_ID sandeepdarkworld/aichatbot:$BUILD_ID'
             }
         }
     }
