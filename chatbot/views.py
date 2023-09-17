@@ -7,7 +7,7 @@ from .models import Chat
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
 
-openai_api_key = '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'
+openai_api_key = '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'
 openai.api_key = openai_api_key
 
 def ask_openai(message):
@@ -75,8 +75,5 @@ def logout(request):
     auth.logout(request)
     return redirect ('custom_login')
 
-# def redirect_to_login(request):
-#     # Redirect to the login page
-#     return redirect('custom_login')
 
 

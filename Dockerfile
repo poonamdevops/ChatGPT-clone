@@ -18,3 +18,5 @@ EXPOSE 8000
 
 # Start Django and nginx within the container
 CMD service nginx start && python3 /aiBot/manage.py runserver 0.0.0.0:8000
+
+RUN python3 manage.py makemigrations && python3 manage.py migrate
