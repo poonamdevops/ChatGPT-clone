@@ -17,4 +17,4 @@ RUN pip install -r requirements.txt
 EXPOSE 8000
 
 # Start Django and nginx within the container
-CMD service nginx start && nohup python3 /aiBot/manage.py runserver 0.0.0.0:8000 &
+CMD service nginx start && python3 /aiBot/manage.py runserver 0.0.0.0:8000
