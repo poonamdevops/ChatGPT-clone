@@ -27,7 +27,7 @@ DEBUG = True
 
 LOGIN_URL = '/custom_login'
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
