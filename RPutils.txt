@@ -1,6 +1,6 @@
 server {
     listen 80;
-    server_name www.codewithharry.in;
+    server_name 34.227.81.233;
 
     location = /favicon.ico { access_log off; log_not_found off; }
     location /static/ {

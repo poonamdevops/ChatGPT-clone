@@ -13,29 +13,29 @@ source env/bin/activate
 
 pip install django gunicorn
 
-django-admin startproject textutils /aiBot
-
 python3 /aiBot/manage.py makemigrations
 python3 /aiBot/manage.py migrate
 
+deactivate 
+
 ufw allow 8000
-
-gunicorn --bind 0.0.0.0:8000 textutils.wsgi
-
-deactivate
 
 cat /aiBot/unicornSocket.txt > /etc/systemd/system/gunicorn.socket
 
 cat /aiBot/unicornService.txt > /etc/systemd/system/gunicorn.service
 
-systemctl start gunicorn.socket
+service gunicorn.socket start
 
-systemctl enable gunicorn.socket
+service gunicorn.socket enable
 
-cat /aiBot/RPutils.txt > /etc/nginx/sites-available/textutils
+gunicorn --bind 0.0.0.0:8000 django_chatbot.wsgi
 
-ln -s /etc/nginx/sites-available/textutils /etc/nginx/sites-enabled/
+cat /aiBot/RPutils.txt > /etc/nginx/sites-available/chatbot
 
-systemctl restart nginx
+rm -f etc/nginx/sites-available/default
+
+ln -s /etc/nginx/sites-available/chatbot /etc/nginx/sites-enabled/
+
+service nginx restart
 
 
