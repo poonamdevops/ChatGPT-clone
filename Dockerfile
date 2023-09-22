@@ -10,7 +10,7 @@ COPY . /aiBot/
 
 RUN pip install -r requirements.txt
 
-RUN chmod +x /envSetup.sh
+RUN chmod +x envSetup.sh
 
 RUN ./envSetup.sh
 
