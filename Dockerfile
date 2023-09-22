@@ -4,7 +4,7 @@ WORKDIR /aiBot
 
 COPY . /aiBot/
 
-# RUN pip install -r requirements.txt
+RUN pip install -r requirements.txt
 
 RUN chmod +x envSetup.sh
 
