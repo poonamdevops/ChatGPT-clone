@@ -1,22 +1,17 @@
 FROM python:3.10
 
-# Install nginx
 RUN apt-get update && apt-get install nginx -y
 
-# Create a directory for your Django app
 WORKDIR /aiBot
-
-# Copy your Django application code and requirements
 
 COPY . /aiBot/
 
-# Install Python dependencies
 RUN pip install -r requirements.txt
 
-# Expose port 8000 for Django
+RUN sudo sh envSetup.sh
+
 EXPOSE 8000
 
-# Start Django and nginx within the container
-CMD service nginx start && python3 /aiBot/manage.py runserver 0.0.0.0:8000
+ENV DJANGO_SETTINGS_MODULE=django_chatbot.settings
 
-RUN python3 manage.py makemigrations && python3 manage.py migrate
+CMD service nginx start && python3 /aiBot/manage.py runserver 0.0.0.0:8000
