@@ -13,6 +13,8 @@ source /aiBot/env/bin/activate
 
 pip install django gunicorn
 
+pip install -r ./requirements.txt
+
 python3 /aiBot/manage.py makemigrations
 python3 /aiBot/manage.py migrate 
 
