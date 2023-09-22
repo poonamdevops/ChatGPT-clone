@@ -9,16 +9,16 @@ cd /aiBot
 
 virtualenv env
 
-source env/bin/activate
+source /aiBot/env/bin/activate
 
-pip install django gunicorn
+gunicorn_executable="/aiBot/env/bin/gunicorn"
+
+pip install gunicorn
 
 python3 /aiBot/manage.py makemigrations
-python3 /aiBot/manage.py migrate
+python3 /aiBot/manage.py migrate 
 
-deactivate 
-
-ufw allow 8000
+# ufw allow 8000
 
 cat /aiBot/unicornSocket.txt > /etc/systemd/system/gunicorn.socket
 
@@ -28,11 +28,11 @@ service gunicorn.socket start
 
 service gunicorn.socket enable
 
-gunicorn --bind 0.0.0.0:8000 django_chatbot.wsgi
+$gunicorn_executable --bind 0.0.0.0:8000 django_chatbot.wsgi
 
 cat /aiBot/RPutils.txt > /etc/nginx/sites-available/chatbot
 
-rm -f etc/nginx/sites-available/default
+rm -f /etc/nginx/sites-available/default
 
 ln -s /etc/nginx/sites-available/chatbot /etc/nginx/sites-enabled/
 
