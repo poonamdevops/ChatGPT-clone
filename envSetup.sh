@@ -13,7 +13,7 @@ source /aiBot/env/bin/activate
 
 gunicorn_executable="/aiBot/env/bin/gunicorn"
 
-pip install gunicorn
+pip install django gunicorn
 
 python3 /aiBot/manage.py makemigrations
 python3 /aiBot/manage.py migrate 
