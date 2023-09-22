@@ -11,7 +11,7 @@ virtualenv env
 
 source /aiBot/env/bin/activate
 
-pip install django gunicorn
+pip install gunicorn
 
 pip install -r ./requirements.txt
 
