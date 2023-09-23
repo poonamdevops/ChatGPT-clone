@@ -22,18 +22,18 @@ python3 /aiBot/manage.py makemigrations
 python3 /aiBot/manage.py migrate 
 
 
-cp /aiBot/chatbotUtils /etc/nginx/sites-available/chatbotUtils
+cp -f /aiBot/default /etc/nginx/sites-available/default
 
-rm -f /etc/nginx/sites-available/default
-
-ln -s /etc/nginx/sites-available/chatbotUtils /etc/nginx/sites-enabled/
+ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/
 
 cp /aiBot/gunicorn.socket /etc/systemd/system/gunicorn.socket
 
 cp /aiBot/gunicorn.service /etc/systemd/system/gunicorn.service
 
-service gunicorn.socket start
+mv /usr/local/bin/gunicorn /aiBot/env/bin/
 
-service nginx start
+service gunicorn start  
 
-service gunicorn.socket enable
+service nginx restart
+
+service gunicorn enable
