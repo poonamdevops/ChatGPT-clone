@@ -1,4 +1,5 @@
 #!/bin/bash
+
 apt-get update
 
 apt-get install python3-pip python3-dev nginx
@@ -22,10 +23,6 @@ cat /aiBot/unicornSocket.txt > /etc/systemd/system/gunicorn.socket
 
 cat /aiBot/unicornService.txt > /etc/systemd/system/gunicorn.service
 
-service gunicorn.socket start
-
-service gunicorn.socket enable
-
 cat /aiBot/RPutils.txt > /etc/nginx/sites-available/chatbot
 
 rm -f /etc/nginx/sites-available/default
@@ -34,3 +31,6 @@ ln -s /etc/nginx/sites-available/chatbot /etc/nginx/sites-enabled/
 
 service nginx restart
 
+service gunicorn.socket start
+
+service gunicorn.socket enable
