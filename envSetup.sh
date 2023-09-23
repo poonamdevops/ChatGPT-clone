@@ -21,15 +21,15 @@ set -x
 python3 /aiBot/manage.py makemigrations
 python3 /aiBot/manage.py migrate 
 
-cat /aiBot/RPutils.txt > /etc/nginx/sites-available/chatbot
+cat /aiBot/RPutils.txt>/etc/nginx/sites-available/chatbot
 
 rm -f /etc/nginx/sites-available/default
 
 ln -s /etc/nginx/sites-available/chatbot /etc/nginx/sites-enabled/
 
-cat /aiBot/unicornSocket.txt > /etc/systemd/system/gunicorn.socket
+cat /aiBot/unicornSocket.txt>/etc/systemd/system/gunicorn.socket
 
-cat /aiBot/unicornService.txt > /etc/systemd/system/gunicorn.service
+cat /aiBot/unicornService.txt>/etc/systemd/system/gunicorn.service
 
 service gunicorn.socket restart
 
