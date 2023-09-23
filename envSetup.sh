@@ -16,6 +16,8 @@ pip install gunicorn
 
 pip install -r ./requirements.txt
 
+set -x
+
 python3 /aiBot/manage.py makemigrations
 python3 /aiBot/manage.py migrate 
 
@@ -25,12 +27,12 @@ rm -f /etc/nginx/sites-available/default
 
 ln -s /etc/nginx/sites-available/chatbot /etc/nginx/sites-enabled/
 
-service nginx restart
-
 cat /aiBot/unicornSocket.txt > /etc/systemd/system/gunicorn.socket
 
 cat /aiBot/unicornService.txt > /etc/systemd/system/gunicorn.service
 
 service gunicorn.socket restart
+
+service nginx restart
 
 service gunicorn.socket enable
