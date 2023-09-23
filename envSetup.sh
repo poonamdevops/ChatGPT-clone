@@ -27,9 +27,9 @@ rm -f /etc/nginx/sites-available/default
 
 ln -s /etc/nginx/sites-available/chatbotUtils /etc/nginx/sites-enabled/
 
-cat /aiBot/gunicorn.socket /etc/systemd/system/gunicorn.socket
+cp /aiBot/gunicorn.socket /etc/systemd/system/gunicorn.socket
 
-cat /aiBot/gunicorn.service /etc/systemd/system/gunicorn.service
+cp /aiBot/gunicorn.service /etc/systemd/system/gunicorn.service
 
 service gunicorn.socket restart
 
