@@ -21,7 +21,6 @@ set -x
 python3 /aiBot/manage.py makemigrations
 python3 /aiBot/manage.py migrate 
 
-deactivate
 
 cp /aiBot/chatbotUtils /etc/nginx/sites-available/chatbotUtils
 
@@ -33,8 +32,8 @@ cp /aiBot/gunicorn.socket /etc/systemd/system/gunicorn.socket
 
 cp /aiBot/gunicorn.service /etc/systemd/system/gunicorn.service
 
-service gunicorn.socket restart
+service gunicorn.socket start
 
-service nginx restart
+service nginx start
 
 service gunicorn.socket enable
