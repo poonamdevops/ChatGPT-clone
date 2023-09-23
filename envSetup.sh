@@ -2,7 +2,7 @@
 
 apt-get update
 
-apt-get install python3-pip python3-dev nginx
+apt-get install python3-pip python3-dev nginx -y
 
 pip3 install virtualenv
 
