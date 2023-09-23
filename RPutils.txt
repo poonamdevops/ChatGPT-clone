@@ -3,12 +3,12 @@ server {
     server_name 34.204.99.129;
 
     location = /favicon.ico { access_log off; log_not_found off; }
-    location /static/ {
+    location / {
         root /aiBot;
     }
 
     location / {
         include proxy_params;
-        proxy_pass http://unix:/run/gunicorn.socket;
+        proxy_pass http://unix:/run/gunicorn.sock;
     }
 }
