@@ -21,6 +21,8 @@ set -x
 python3 /aiBot/manage.py makemigrations
 python3 /aiBot/manage.py migrate 
 
+deactivate
+
 cp /aiBot/chatbotUtils /etc/nginx/sites-available/chatbotUtils
 
 rm -f /etc/nginx/sites-available/default
