@@ -24,13 +24,15 @@ python3 /aiBot/manage.py migrate
 
 cp -f /aiBot/default /etc/nginx/sites-available/default
 
-ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/
+# ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/
 
 cp /aiBot/gunicorn.socket /etc/systemd/system/gunicorn.socket
 
 cp /aiBot/gunicorn.service /etc/systemd/system/gunicorn.service
 
-mv /usr/local/bin/gunicorn /aiBot/env/bin/
+which gunicorn
+
+# mv /usr/local/bin/gunicorn /aiBot/env/bin/
 
 service gunicorn start  
 
