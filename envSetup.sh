@@ -36,6 +36,8 @@ which gunicorn
 
 service gunicorn start  
 
+journalctl -xeu gunicorn
+
 service nginx restart
 
 service gunicorn enable
