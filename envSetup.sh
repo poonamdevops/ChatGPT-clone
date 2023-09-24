@@ -32,6 +32,11 @@ systemctl enable gunicorn.socket
 #configuring nginx reverse proxy 
 cp -f /aiBot/default /etc/nginx/sites-available/default
 
+systemctl daemon-reload
+
 systemctl restart nginx
 
-#systemctl deamon-reload  [if you have done any changes and don't forget to restart gunicorn and nginx]
+systemctl enable nginx
+
+systemctl restart gunicorn.socket
+
