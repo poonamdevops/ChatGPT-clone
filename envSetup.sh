@@ -23,7 +23,7 @@ cp /aiBot/gunicorn.socket /etc/systemd/system/gunicorn.socket
 
 cp /aiBot/gunicorn.service /etc/systemd/system/gunicorn.service
 
-service gunicorn.socket enable
+service gunicorn enable
 
 service nginx enable
 
@@ -34,5 +34,5 @@ cp -f /aiBot/default /etc/nginx/sites-available/default
 
 service nginx restart
 
-service gunicorn.socket restart
+service gunicorn restart
 
