@@ -4,6 +4,8 @@ apt-get update
 
 apt-get install python3-pip python3-dev nginx -y
 
+set -x
+
 pip3 install virtualenv
 
 cd /aiBot
@@ -12,32 +14,24 @@ virtualenv env
 
 source /aiBot/env/bin/activate
 
-pip install gunicorn
-
 pip install -r ./requirements.txt
 
-set -x
+deactivate
 
-python3 /aiBot/manage.py makemigrations
-python3 /aiBot/manage.py migrate 
-
-
-cp -f /aiBot/default /etc/nginx/sites-available/default
-
-# ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/
-
+#configuring gunicorn as a service 
 cp /aiBot/gunicorn.socket /etc/systemd/system/gunicorn.socket
 
 cp /aiBot/gunicorn.service /etc/systemd/system/gunicorn.service
 
-which gunicorn
+apt-get install systemctl
 
-# mv /usr/local/bin/gunicorn /aiBot/env/bin/
+systemctl start gunicorn.socket 
 
-service gunicorn start  
+systemctl enable gunicorn.socket 
 
-journalctl -xeu gunicorn
+#configuring nginx reverse proxy 
+cp -f /aiBot/default /etc/nginx/sites-available/default
 
-service nginx restart
+systemctl restart nginx
 
-service gunicorn enable
+#systemctl deamon-reload  [if you have done any changes and don't forget to restart gunicorn and nginx]

@@ -4,7 +4,7 @@ Requires=gunicorn.socket
 After=network.target
 
 [Service]
-User=ubuntu
+User=root
 Group=www-data
 WorkingDirectory=/aiBot
 ExecStart=/aiBot/env/bin/gunicorn \
