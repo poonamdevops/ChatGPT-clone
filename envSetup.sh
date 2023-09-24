@@ -23,18 +23,16 @@ cp /aiBot/gunicorn.socket /etc/systemd/system/gunicorn.socket
 
 cp /aiBot/gunicorn.service /etc/systemd/system/gunicorn.service
 
-apt-get install systemctl
+service gunicorn.socket enable
 
-systemctl enable gunicorn.socket 
-
-systemctl enable nginx
+service nginx enable
 
 #configuring nginx reverse proxy 
 cp -f /aiBot/default /etc/nginx/sites-available/default
 
-systemctl daemon-reload
+# systemctl daemon-reload
 
-systemctl restart nginx
+service nginx restart
 
-systemctl restart gunicorn.socket
+service gunicorn.socket restart
 
