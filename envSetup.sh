@@ -23,6 +23,8 @@ cp /aiBot/gunicorn.socket /etc/systemd/system/gunicorn.socket
 
 cp /aiBot/gunicorn.service /etc/systemd/system/gunicorn.service
 
+apt-get install systemctl
+
 systemctl enable gunicorn
 
 systemctl enable nginx 
