@@ -1,8 +1,6 @@
 #!/bin/bash
 
-apt-get update
-
-apt-get install python3-pip python3-dev nginx -y
+# apt-get install python3-pip python3-dev nginx -y
 
 set -x
 
