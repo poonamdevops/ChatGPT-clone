@@ -15,4 +15,8 @@ ENV DJANGO_SETTINGS_MODULE=django_chatbot.settings
 
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
+RUN mkdir -p /var/log/gunicorn /var/log/nginx
+
+RUN chown -R www-data:www-data /var/log/gunicorn /var/log/nginx
+
 CMD ["/usr/bin/supervisord"]
