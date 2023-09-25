@@ -19,6 +19,6 @@ RUN mkdir -p /var/log/gunicorn /var/log/nginx /var/log/supervisord
 
 RUN chown -R www-data:www-data /var/log/gunicorn /var/log/nginx /var/log/supervisord
 
-CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/supervisord.conf"]
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/supervisord.conf", "service gunicorn restart"]
 
 
