@@ -19,4 +19,5 @@ RUN mkdir -p /var/log/gunicorn /var/log/nginx
 
 RUN chown -R www-data:www-data /var/log/gunicorn /var/log/nginx
 
-CMD ["/usr/bin/supervisord"]
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/supervisord.conf", "-k", "debug"]
+
