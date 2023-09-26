@@ -14,7 +14,7 @@ source /aiBot/env/bin/activate
 
 pip install -r ./requirements.txt
 
-deactivate
+# deactivate
 
 #configuring gunicorn as a service 
 cp /aiBot/gunicorn.socket /etc/systemd/system/gunicorn.socket
