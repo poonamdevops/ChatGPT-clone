@@ -32,7 +32,7 @@ cp -f /aiBot/default /etc/nginx/sites-available/default
 
 # systemctl daemon-reload
 
-# systemctl restart nginx
+systemctl restart nginx
 
-# systemctl restart gunicorn
+systemctl restart gunicorn
 
