@@ -9,12 +9,11 @@ COPY . /aiBot/
 # RUN chmod +x envSetup.sh && \
 #     ./envSetup.sh
 
-RUN apt-get update && \
-    apt-get install -y supervisor python3-pip python3-dev nginx && \
+RUN apk update && \
+    apk add supervisor python3-dev nginx && \
     chmod +x envSetup.sh && \
     ./envSetup.sh && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
+    rm -rf /var/cache/apk/*
 
 EXPOSE 8000
 

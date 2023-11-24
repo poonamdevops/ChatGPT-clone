@@ -6,11 +6,11 @@ pip3 install virtualenv
 
 cd /aiBot
 
-virtualenv env
+python3 -m venv env
 
 source /aiBot/env/bin/activate
 
-pip install -r ./requirements.txt
+pip install --no-cache-dir -r ./requirements.txt
 
 cp /aiBot/gunicorn.socket /etc/systemd/system/gunicorn.socket
 
