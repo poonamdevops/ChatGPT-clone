@@ -9,7 +9,7 @@ RUN apt-get update && apt-get install -y supervisor python3-pip python3-dev ngin
 RUN chmod +x envSetup.sh && \
     ./envSetup.sh
 
-EXPOSE 80
+EXPOSE 8000
 
 ENV DJANGO_SETTINGS_MODULE=django_chatbot.settings
 
@@ -20,8 +20,3 @@ RUN mkdir -p /var/log/gunicorn /var/log/nginx /var/log/supervisord
 RUN chown -R www-data:www-data /var/log/gunicorn /var/log/nginx /var/log/supervisord
 
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
-
-
-
-
-
