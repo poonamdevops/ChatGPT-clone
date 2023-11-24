@@ -13,10 +13,10 @@ EXPOSE 8000
 
 ENV DJANGO_SETTINGS_MODULE=django_chatbot.settings
 
-COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+# COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
-RUN mkdir -p /var/log/gunicorn /var/log/nginx /var/log/supervisord
+# RUN mkdir -p /var/log/gunicorn /var/log/nginx /var/log/supervisord
 
-RUN chown -R www-data:www-data /var/log/gunicorn /var/log/nginx /var/log/supervisord
+# RUN chown -R www-data:www-data /var/log/gunicorn /var/log/nginx /var/log/supervisord
 
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
