@@ -12,7 +12,7 @@ COPY . /aiBot/
 RUN apk update && \
     apk add supervisor python3-dev nginx && \
     chmod +x envSetup.sh && \
-    ./envSetup.sh && \
+    /aiBot/envSetup.sh && \
     rm -rf /var/cache/apk/*
 
 EXPOSE 8000
