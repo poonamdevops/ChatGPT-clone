@@ -1,4 +1,4 @@
-FROM python:3.10-alpine
+FROM python:3.10-slim
 
 WORKDIR /aiBot
 
@@ -9,11 +9,12 @@ COPY . /aiBot/
 # RUN chmod +x envSetup.sh && \
 #     ./envSetup.sh
 
-RUN apk update && \
-    apk add supervisor python3-dev nginx && \
+RUN apt-get update && \
+    apt-get install supervisor python3-dev nginx && \
     chmod +x envSetup.sh && \
     ./envSetup.sh && \
-    rm -rf /var/cache/apk/*
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
 EXPOSE 8000
 
