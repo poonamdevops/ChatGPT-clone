@@ -24,7 +24,26 @@ pipeline {
             steps{
                 echo "Building the image"
                 sh 'docker build -t aichatbot:$BUILD_ID .'
-                // sh 'docker image tag aichatbot:$BUILD_ID sandeepdarkworld/aichatbot:$BUILD_ID'
+                sh 'docker image tag aichatbot:$BUILD_ID sandeepdarkworld/aichatbot:$BUILD_ID'
+            }
+        }
+
+        stage ("Push To DockerHub"){
+            agent {
+                node {
+                    label 'dockerNode'
+                }
+            }
+
+            steps {
+                echo "Pushing to dockerHub"
+                withCredentials([usernamePassword(credentialsId: DOCKER_HUB_CREDENTIALS, passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
+                    sh "docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD"
+                    // sh "docker push sandeepdarkworld/aichatbot:$BUILD_ID"
+                    sh 'docker pull hello-world'
+                    sh 'docker tag sandeepdarkworld/hello-world'
+                    sh 'docker image push sandeepdarkworld/hello-world'
+                }
             }
         }
     }
