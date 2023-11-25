@@ -9,8 +9,6 @@ COPY . /aiBot/
 # RUN chmod +x envSetup.sh && \
 #     ./envSetup.sh
 
-COPY envSetup.sh /aiBot/envSetup.sh
-
 RUN apk update && \
     apk add supervisor python3-dev nginx && \
     chmod +x envSetup.sh && \
