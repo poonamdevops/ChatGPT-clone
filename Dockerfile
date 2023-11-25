@@ -10,7 +10,7 @@ COPY . /aiBot/
 #     ./envSetup.sh
 
 RUN apt-get update && \
-    apt-get install supervisor python3-dev nginx && \
+    apt-get install supervisor python3-dev nginx -y && \
     chmod +x envSetup.sh && \
     ./envSetup.sh && \
     apt-get clean && \
