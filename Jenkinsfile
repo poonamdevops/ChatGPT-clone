@@ -23,8 +23,8 @@ pipeline {
             }
             steps{
                 echo "Building the image"
-                sh 'docker build -t aichatbot:$BUILD_ID .'
-                sh 'docker image tag aichatbot:$BUILD_ID sandeepdarkworld/aichatbot:$BUILD_ID'
+                // sh 'docker build -t aichatbot:$BUILD_ID .'
+                
             }
         }
 
@@ -40,8 +40,9 @@ pipeline {
                 withCredentials([usernamePassword(credentialsId: 'DOCKER_HUB_CREDENTIALS', passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
                     sh "docker login -u ${env.DOCKER_USERNAME} -p ${env.DOCKER_PASSWORD}"
                     // sh "docker push sandeepdarkworld/aichatbot:$BUILD_ID"
+                    // sh 'docker image tag aichatbot:$BUILD_ID sandeepdarkworld/aichatbot:$BUILD_ID'
                     sh "docker pull hello-world"
-                    sh "docker tag ${env.DOCKER_USERNAME}/hello-world"
+                    sh "docker tag hello-world ${env.DOCKER_USERNAME}/hello-world"
                     sh "docker image push ${env.DOCKER_USERNAME}/hello-world"
                 }
             }
