@@ -12,9 +12,9 @@ source /aiBot/env/bin/activate
 
 pip install --no-cache-dir -r ./requirements.txt
 
-cp /aiBot/gunicorn.socket /etc/systemd/system/gunicorn.socket
+cp /aiBot/gunicorn.socket /etc/systemd/system/
 
-cp /aiBot/gunicorn.service /etc/systemd/system/gunicorn.service
+cp /aiBot/gunicorn.service /etc/systemd/system/
 
 #configuring nginx reverse proxy 
 cp -f /aiBot/default /etc/nginx/sites-available/default
