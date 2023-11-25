@@ -37,12 +37,12 @@ pipeline {
 
             steps {
                 echo "Pushing to dockerHub"
-                withCredentials([usernamePassword(credentialsId: DOCKER_HUB_CREDENTIALS, passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
-                    sh "docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD"
+                withCredentials([usernamePassword(credentialsId: 'DOCKER_HUB_CREDENTIALS', passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
+                    sh "docker login -u ${env.DOCKER_USERNAME} -p ${env.DOCKER_PASSWORD}"
                     // sh "docker push sandeepdarkworld/aichatbot:$BUILD_ID"
-                    sh 'docker pull hello-world'
-                    sh 'docker tag sandeepdarkworld/hello-world'
-                    sh 'docker image push sandeepdarkworld/hello-world'
+                    sh "docker pull hello-world"
+                    sh "docker tag ${env.DOCKER_USERNAME}/hello-world"
+                    sh "docker image push ${env.DOCKER_USERNAME}/hello-world"
                 }
             }
         }
