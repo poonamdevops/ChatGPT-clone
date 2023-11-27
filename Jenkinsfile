@@ -1,5 +1,9 @@
 pipeline {
     agent none
+    environment {
+        NEXUS_REGISTRY_URL = 'http://54.196.98.221:8085/'
+        DOCKER_IMG_NAME = "aichatbot:$BUILD_ID"
+    }
     
     stages {
         
@@ -23,12 +27,12 @@ pipeline {
             }
             steps{
                 echo "Building the image"
-                sh "docker build -t aichatbot:$BUILD_ID ."
+                sh "docker build -t ${DOCKER_IMG_NAME} ."
                 
             }
         }
 
-        stage ("Push To DockerHub"){
+        stage ("Pushing To Nexus Docker Private Repository"){
             agent {
                 node {
                     label 'dockerNode'
@@ -36,12 +40,11 @@ pipeline {
             }
 
             steps {
-                echo "Pushing to dockerHub"
-                withCredentials([usernamePassword(credentialsId: 'DOCKER_HUB_CREDENTIALS', passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
-                    sh "docker login -u ${env.DOCKER_USERNAME} -p ${env.DOCKER_PASSWORD}"
-                    sh "docker image tag aichatbot:$BUILD_ID ${env.DOCKER_USERNAME}/aichatbot:$BUILD_ID"
-                    sh "docker push ${env.DOCKER_USERNAME}/aichatbot:$BUILD_ID"
-                }
+                echo "Pushing to Nexus"
+                withCredentials([usernamePassword(credentialsId: "NEXUS_CREDENTIALS_ID", usernameVariable: 'NEXUS_USERNAME', passwordVariable: 'NEXUS_PASSWORD')]) {
+                    sh "docker login -u ${NEXUS_USERNAME} -p ${NEXUS_PASSWORD} ${NEXUS_REGISTRY_URL}"
+                    sh "docker push ${DOCKER_IMG_NAME}"
+                }                
             }
         }
     }
