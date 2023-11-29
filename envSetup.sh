@@ -10,6 +10,8 @@ python3 -m venv env
 
 source /aiBot/env/bin/activate
 
+python3 manage.py migrate
+
 pip install --no-cache-dir -r ./requirements.txt
 
 cp /aiBot/gunicorn.socket /etc/systemd/system/
