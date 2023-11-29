@@ -25,3 +25,5 @@ cp supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 mkdir -p /var/log/gunicorn /var/log/nginx /var/log/supervisord
 
 chown -R www-data:www-data /var/log/gunicorn /var/log/nginx /var/log/supervisord
+
+python3 manage.py migrate

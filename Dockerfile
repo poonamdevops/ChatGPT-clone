@@ -4,11 +4,6 @@ WORKDIR /aiBot
 
 COPY . /aiBot/
 
-# RUN apt-get update && apt-get install -y supervisor python3-pip python3-dev nginx
-
-# RUN chmod +x envSetup.sh && \
-#     ./envSetup.sh
-
 RUN apt-get update && \
     apt-get install supervisor python3-dev nginx -y && \
     chmod +x envSetup.sh && \
