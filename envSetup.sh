@@ -10,7 +10,7 @@ python3 -m venv env
 
 source /aiBot/env/bin/activate
 
-mkfir db
+mkdir db
 
 python3 manage.py migrate
 
