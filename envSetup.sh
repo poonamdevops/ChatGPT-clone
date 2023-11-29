@@ -8,13 +8,13 @@ cd /aiBot
 
 python3 -m venv env
 
-source /aiBot/env/bin/activate
-
 mkdir db
 
-python3 manage.py migrate
+source /aiBot/env/bin/activate
 
 pip install --no-cache-dir -r ./requirements.txt
+
+python3 manage.py migrate
 
 cp /aiBot/gunicorn.socket /etc/systemd/system/
 
