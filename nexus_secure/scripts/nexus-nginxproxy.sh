@@ -36,7 +36,7 @@ openssl req -passin pass:"$1" -subj "/C=US/ST=Random/L=Random/O=Global Security/
 os=$(uname -s)
 
 # Check if the operating system is Linux
-if [ "$os" = "linux-gnu"* ]; then
+if [ "$os" = "Linux"* ]; then
     # Linux
     apt-get install -y ca-certificates
     cp ../certs/rootCA.pem /etc/ssl/certs/
