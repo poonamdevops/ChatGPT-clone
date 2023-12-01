@@ -5,14 +5,15 @@ WORKDIR /aiBot
 COPY . /aiBot/
 
 RUN apt-get update && \
-    apt-get install supervisor python3-dev nginx -y && \
+    apt-get install python3-dev -y && \
     chmod +x envSetup.sh && \
     ./envSetup.sh && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-EXPOSE 80
+EXPOSE 8000
 
 ENV DJANGO_SETTINGS_MODULE=django_chatbot.settings
 
-CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
+# CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
+CMD ["gunicorn", "django_chatbot.wsgi:application", "--bind", "0.0.0.0:8000"]
