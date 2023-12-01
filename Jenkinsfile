@@ -3,6 +3,7 @@ pipeline {
     environment {
         NEXUS_REGISTRY_URL = 'https://localhost:6666/'
         DOCKER_IMG_NAME = "aichatbot:$BUILD_ID"
+        SHELL_DIR = "/dockerNode/workspace/chatbotApp/nexus_secure/scripts"
     }
     
     stages {
@@ -42,11 +43,8 @@ pipeline {
 
             steps {
                 echo "Taking care of the Business"
-                sh " cp -r nexus_secure /"
-                sh " cd /nexus_secure/scripts"
-                sh "pwd"
-                sh "chmod +x ./nexus-nginxproxy.sh ./uninstall.sh"
-                sh "bash ./nexus-nginxproxy.sh \"permutable\""
+                sh "chmod +x ${SHELL_DIR}/nexus-nginxproxy.sh ${SHELL_DIR}/uninstall.sh"
+                sh "bash ${SHELL_DIR}/nexus-nginxproxy.sh \"permutable\""
             }
         }
 
