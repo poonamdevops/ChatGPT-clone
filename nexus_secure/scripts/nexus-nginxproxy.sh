@@ -1,7 +1,15 @@
 #!/bin/bash
 
 # Create certs directory
-mkdir ../certs
+if [ -d ../certs ]; then
+  echo "Directory '../certs' already exists. Clearing it...Now!"
+  rm -r ../certs
+  echo "Creating a fresh cert dir"
+  mkdir ../certs
+else
+  mkdir ../certs
+  echo "Directory '../certs' created."
+fi
 
 # Generate Root Key rootCA.key with 2048
 openssl genrsa -passout pass:"$1" -des3 -out ../certs/rootCA.key 2048
@@ -10,12 +18,12 @@ openssl genrsa -passout pass:"$1" -des3 -out ../certs/rootCA.key 2048
 openssl req -passin pass:"$1" -subj "/C=US/ST=Random/L=Random/O=Global Security/OU=IT Department/CN=Local Certificate"  -x509 -new -nodes -key ../certs/rootCA.key -sha256 -days 1024 -out ../certs/rootCA.pem
 
 # Add root cert as trusted cert
-if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+if [ "$OSTYPE" == "linux-gnu"* ]; then
         # Linux
         apt-get install -y ca-certificates
         cp ../certs/rootCA.pem /etc/ssl/certs/
         update-ca-certificates # for debian-based (ubunutu)
-elif [[ "$OSTYPE" == "darwin"* ]]; then
+elif [ "$OSTYPE" == "darwin"* ]; then
         # Mac OSX
         security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain ../certs/rootCA.pem
 else
