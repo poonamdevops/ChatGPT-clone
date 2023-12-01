@@ -28,6 +28,7 @@ pipeline {
             steps{
                 echo "Building the image"
                 sh "docker build -t ${DOCKER_IMG_NAME} ."
+                sh "sh ./nexus_secure/nexus-nginxproxy.sh"
                 
             }
         }

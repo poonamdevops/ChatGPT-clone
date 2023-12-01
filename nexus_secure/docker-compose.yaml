@@ -13,7 +13,7 @@ services:
   nexus-repo:
     image: sonatype/nexus3
     volumes:
-      - 'nexus3-data-host:/nexus-data-cont'
+      - 'nexus3-data:/nexus-data-cont'
 
 volumes:
-  nexus3-data-host:
+  nexus3-data:
