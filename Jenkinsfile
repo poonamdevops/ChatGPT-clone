@@ -28,8 +28,23 @@ pipeline {
             steps{
                 echo "Building the image"
                 sh "docker build -t ${DOCKER_IMG_NAME} ."
-                sh "sh ./nexus_secure/nexus-nginxproxy.sh"
+               
                 
+            }
+        }
+
+        stage ("Running Nexus Repository"){
+            agent {
+                node {
+                    label "dockerNode"
+                }
+            }
+
+            steps {
+                echo "Taking care of the Business"
+                sh " cp -r nexus_secure /"
+                sh "chmod 777 /nexus_secure"
+                sh "sh /nexus_secure/scripts/nexus-nginxproxy.sh"
             }
         }
 
