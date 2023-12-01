@@ -18,7 +18,7 @@ openssl genrsa -passout pass:"$1" -des3 -out ../certs/rootCA.key 2048
 openssl req -passin pass:"$1" -subj "/C=US/ST=Random/L=Random/O=Global Security/OU=IT Department/CN=Local Certificate"  -x509 -new -nodes -key ../certs/rootCA.key -sha256 -days 1024 -out ../certs/rootCA.pem
 
 # Add root cert as trusted cert
-if ["$(uname -s)" == "linux-gnu"* ]; then
+if [ "$(uname -s)" == "Linux"* ]; then
         # Linux
         apt-get install -y ca-certificates
         cp ../certs/rootCA.pem /etc/ssl/certs/
