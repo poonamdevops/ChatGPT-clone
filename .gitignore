@@ -1,5 +1,1 @@
 db
-supervisord.conf
-default
-gunicorn.socket
-guncorn.service

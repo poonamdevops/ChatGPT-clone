@@ -15,5 +15,4 @@ EXPOSE 8000
 
 ENV DJANGO_SETTINGS_MODULE=django_chatbot.settings
 
-# CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
 CMD ["/aiBot/env/bin/gunicorn", "django_chatbot.wsgi:application", "--bind", "0.0.0.0:8000"]
