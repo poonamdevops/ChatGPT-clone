@@ -20,38 +20,9 @@ openssl genrsa -passout pass:"$1" -des3 -out ../certs/rootCA.key 2048
 openssl req -passin pass:"$1" -subj "/C=US/ST=Random/L=Random/O=Global Security/OU=IT Department/CN=Local Certificate"  -x509 -new -nodes -key ../certs/rootCA.key -sha256 -days 1024 -out ../certs/rootCA.pem
 
 # Add root cert as trusted cert
-# if [ "$(uname -s)" = "Linux"* ]; then
-#         # Linux
-#         apt-get install -y ca-certificates
-#         cp ../certs/rootCA.pem /etc/ssl/certs/
-#         update-ca-certificates # for debian-based (ubunutu)
-# elif [[ "$OSTYPE" == "darwin"* ]]; then
-#         # Mac OSX
-#         security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain ../certs/rootCA.pem
-# else
-#         # Unknown.
-#         echo "Couldn't find desired Operating System. Exiting Now ......"
-#         exit 1
-# fi
-
-# Capture the output of echo "$OSTYPE" into the os variable
-os=$(uname -s)
-
-# Check if the operating system is Linux
-if [ "$os" = "Linux"* ]; then
-    # Linux
-    apt-get install -y ca-certificates
-    cp ../certs/rootCA.pem /etc/ssl/certs/
-    update-ca-certificates # for debian-based (ubuntu)
-elif [ "$os" = "darwin"* ]; then
-    # Mac OSX
-    security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain ../certs/rootCA.pem
-else
-    # Unknown.
-    echo "Couldn't find desired Operating System. Exiting Now ......"
-    exit 1
-fi
-
+apt-get install -y ca-certificates
+cp ../certs/rootCA.pem /etc/ssl/certs/
+update-ca-certificates # for debian-based (ubuntu)
 
 # Generate nexus Cert
 openssl req -subj "/C=US/ST=Random/L=Random/O=Global Security/OU=IT Department/CN=localhost"  -new -sha256 -nodes -out ../certs/nexus.csr -newkey rsa:2048 -keyout ../certs/nexuskey.pem
