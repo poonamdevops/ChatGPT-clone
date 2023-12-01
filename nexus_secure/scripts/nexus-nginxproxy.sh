@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set +x
+
 # Create certs directory
 if [ -d ../certs ]; then
   echo "Directory '../certs' already exists. Clearing it...Now!"
