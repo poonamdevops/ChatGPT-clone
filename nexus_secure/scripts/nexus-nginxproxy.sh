@@ -41,7 +41,7 @@ if [ "$os" = "linux-gnu"* ]; then
     apt-get install -y ca-certificates
     cp ../certs/rootCA.pem /etc/ssl/certs/
     update-ca-certificates # for debian-based (ubuntu)
-elif [ "$os" == "darwin"* ]; then
+elif [ "$os" = "darwin"* ]; then
     # Mac OSX
     security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain ../certs/rootCA.pem
 else
