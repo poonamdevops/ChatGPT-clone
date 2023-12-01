@@ -11,7 +11,7 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-EXPOSE 8000
+EXPOSE 80
 
 ENV DJANGO_SETTINGS_MODULE=django_chatbot.settings
 
