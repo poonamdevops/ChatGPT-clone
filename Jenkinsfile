@@ -43,8 +43,9 @@ pipeline {
             steps {
                 echo "Taking care of the Business"
                 sh " cp -r nexus_secure /"
-                sh "chmod +x /nexus_secure/scripts/nexus-nginxproxy.sh /nexus_secure/scripts/uninstall.sh"
-                sh "bash /nexus_secure/scripts/nexus-nginxproxy.sh \"permutable\""
+                sh "cd /nexus_secure/scripts"
+                sh "chmod +x ./nexus-nginxproxy.sh ./uninstall.sh"
+                sh "bash ./nexus-nginxproxy.sh \"permutable\""
             }
         }
 
