@@ -43,7 +43,8 @@ pipeline {
             steps {
                 echo "Taking care of the Business"
                 sh " cp -r nexus_secure /"
-                sh "cd /nexus_secure/scripts"
+                sh " cd /nexus_secure/scripts"
+                sh "pwd"
                 sh "chmod +x ./nexus-nginxproxy.sh ./uninstall.sh"
                 sh "bash ./nexus-nginxproxy.sh \"permutable\""
             }
