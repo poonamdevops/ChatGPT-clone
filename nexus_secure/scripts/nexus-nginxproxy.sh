@@ -33,7 +33,7 @@ openssl req -passin pass:"$1" -subj "/C=US/ST=Random/L=Random/O=Global Security/
 # fi
 
 # Capture the output of echo "$OSTYPE" into the os variable
-os=$(echo "$OSTYPE")
+os=$(uname -s)
 
 # Check if the operating system is Linux
 if [ "$os" = "linux-gnu"* ]; then
