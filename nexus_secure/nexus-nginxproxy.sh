@@ -38,8 +38,8 @@ echo "I think that's it"
 # echo $PWD
 
 # Making Build Context for Dockerfile from certs dir
-cp ../nexuscert.crt nexus_secure/nexuscert.crt
-cp ../nexuskey.pem nexus_secure/nexuskey.pem
+cp nexuscert.crt ../nexus_secure/nexuscert.crt
+cp nexuskey.pem ../nexus_secure/nexuskey.pem
 
 cd ../nexus_secure
 echo $PWD
