@@ -43,7 +43,7 @@ pipeline {
 
             steps {
                 echo "Taking care of the Business"
-                sh "chmod +x ${SHELL_DIR}/nexus-nginxproxy.sh ${SHELL_DIR}/uninstall.sh"
+                sh "chmod +x ${SHELL_DIR}/nexus-nginxproxy.sh"
                 sh "bash ${SHELL_DIR}/nexus-nginxproxy.sh \"permutable\""
             }
         }
