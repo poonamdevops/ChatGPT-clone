@@ -1,14 +1,10 @@
 #!/bin/bash
 
-cd ../certs/
+rm -r certs
 
-rm -f nexuscert.crt nexuskey.pem nexus.csr rootCA.key rootCA.pem rootCA.srl
-
-cd ../nginx/
+cd nexus_secure
 
 rm -f nexuscert.crt nexuskey.pem
-
-cd ../
 
 docker-compose down
 
