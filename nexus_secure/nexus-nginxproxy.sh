@@ -29,13 +29,9 @@ update-ca-certificates # for debian-based (ubuntu)
 openssl req -subj "/C=US/ST=Random/L=Random/O=Global Security/OU=IT Department/CN=localhost"  -new -sha256 -nodes -out certs/nexus.csr -newkey rsa:2048 -keyout certs/nexuskey.pem
 openssl x509 -req -passin pass:"$1" -in certs/nexus.csr -CA certs/rootCA.pem -CAkey certs/rootCA.key -CAcreateserial -out certs/nexuscert.crt -days 500 -sha256 -extfile <(printf "subjectAltName=DNS:localhost,DNS:nexus-repo")
 
-# cd ../nginx/
+# cd certs/
 cd certs
 echo $PWD
-echo "I think that's it"
-
-# cd ..
-# echo $PWD
 
 # Making Build Context for Dockerfile from certs dir
 cp nexuscert.crt ../nexus_secure/nexuscert.crt
@@ -43,11 +39,9 @@ cp nexuskey.pem ../nexus_secure/nexuskey.pem
 
 cd ../nexus_secure
 echo $PWD
+
 # Docker build nginx image
 docker build --no-cache -t nginx-nexushttps .
-
-# cd ../
-# echo $PWD
 
 # Run nginx and nexus containers
 docker-compose up -d
