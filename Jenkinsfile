@@ -3,7 +3,7 @@ pipeline {
     environment {
         NEXUS_REGISTRY_URL = 'https://localhost:6666/'
         DOCKER_IMG_NAME = "aichatbot:$BUILD_ID"
-        SHELL_DIR = "/dockerNode/workspace/chatbotApp/nexus_secure/scripts"
+        SHELL_DIR = "/dockerNode/workspace/chatbotApp/nexus_secure"
     }
     
     stages {
