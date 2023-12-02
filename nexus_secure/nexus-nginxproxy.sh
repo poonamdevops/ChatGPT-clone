@@ -32,11 +32,14 @@ openssl x509 -req -passin pass:"$1" -in certs/nexus.csr -CA certs/rootCA.pem -CA
 # cd ../nginx/
 cd certs
 echo $PWD
-echo "I think it's it"
+echo "I think that's it"
+
+# cd ..
+# echo $PWD
 
 # Making Build Context for Dockerfile from certs dir
-cp nexuscert.crt ../nexus_secure/nexuscert.crt
-cp nexuskey.pem ../nexus_secure/nexuskey.pem
+cp ../nexuscert.crt nexus_secure/nexuscert.crt
+cp ../nexuskey.pem nexus_secure/nexuskey.pem
 
 cd ../nexus_secure
 echo $PWD
