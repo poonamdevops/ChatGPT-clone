@@ -30,6 +30,7 @@ openssl req -subj "/C=US/ST=Random/L=Random/O=Global Security/OU=IT Department/C
 openssl x509 -req -passin pass:"$1" -in certs/nexus.csr -CA certs/rootCA.pem -CAkey certs/rootCA.key -CAcreateserial -out certs/nexuscert.crt -days 500 -sha256 -extfile <(printf "subjectAltName=DNS:localhost,DNS:nexus-repo")
 
 # cd ../nginx/
+cd /
 echo $PWD
 
 # Making Build Context for Dockerfile
