@@ -30,13 +30,16 @@ openssl req -subj "/C=US/ST=Random/L=Random/O=Global Security/OU=IT Department/C
 openssl x509 -req -passin pass:"$1" -in certs/nexus.csr -CA certs/rootCA.pem -CAkey certs/rootCA.key -CAcreateserial -out certs/nexuscert.crt -days 500 -sha256 -extfile <(printf "subjectAltName=DNS:localhost,DNS:nexus-repo")
 
 # cd ../nginx/
-cd /
+cd certs
 echo $PWD
+echo "I think it's it"
 
-# Making Build Context for Dockerfile
-# cp certs/nexuscert.crt nexuscert.crt
-# cp certs/nexuskey.pem nexuskey.pem
+# Making Build Context for Dockerfile from certs dir
+cp nexuscert.crt ../nexus_secure/nexuscert.crt
+cp nexuskey.pem ../nexus_secure/nexuskey.pem
 
+cd ../nexus_secure
+echo $PWD
 # Docker build nginx image
 docker build --no-cache -t nginx-nexushttps .
 
