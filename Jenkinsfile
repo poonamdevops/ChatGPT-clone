@@ -34,19 +34,19 @@ pipeline {
             }
         }
 
-        stage ("Running Nexus Repository Containers"){
-            agent {
-                node {
-                    label "dockerNode"
-                }
-            }
+        // stage ("Running Nexus Repository Containers"){
+        //     agent {
+        //         node {
+        //             label "dockerNode"
+        //         }
+        //     }
 
-            steps {
-                echo "Taking care of the Business"
-                sh "chmod +x ${SHELL_DIR}/nexus-nginxproxy.sh"
-                sh "bash ${SHELL_DIR}/nexus-nginxproxy.sh \"permutable\""
-            }
-        }
+        //     steps {
+        //         echo "Spinning Nexus Containers"
+        //         sh "chmod +x ${SHELL_DIR}/nexus-nginxproxy.sh"
+        //         sh "bash ${SHELL_DIR}/nexus-nginxproxy.sh \"permutable\""
+        //     }
+        // }
 
         stage ("Pushing To Nexus Docker Private Repository"){
             agent {
@@ -63,6 +63,11 @@ pipeline {
                     sh "docker push localhost:6666/${DOCKER_IMG_NAME}"
                 }              
             }
+        }
+
+        stage('Trigger ManifestUpdate') {
+                echo "triggering updatemanifestjob"
+                build job: 'updateManifest', parameters: [string(name: 'DOCKERTAG', value: "$BUILD_ID")]
         }
     }
 }
