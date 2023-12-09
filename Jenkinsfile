@@ -34,20 +34,6 @@ pipeline {
             }
         }
 
-        // stage ("Running Nexus Repository Containers"){
-        //     agent {
-        //         node {
-        //             label "dockerNode"
-        //         }
-        //     }
-
-        //     steps {
-        //         echo "Spinning Nexus Containers"
-        //         sh "chmod +x ${SHELL_DIR}/nexus-nginxproxy.sh"
-        //         sh "bash ${SHELL_DIR}/nexus-nginxproxy.sh \"permutable\""
-        //     }
-        // }
-
         stage ("Pushing To Nexus Docker Private Repository"){
             agent {
                 node {
@@ -58,7 +44,7 @@ pipeline {
             steps {
                 echo "Pushing to Nexus"
                 withCredentials([usernamePassword(credentialsId: "NEXUS_CREDENTIALS_ID", usernameVariable: 'NEXUS_USERNAME', passwordVariable: 'NEXUS_PASSWORD')]) {
-                    sh "docker login -u ${NEXUS_USERNAME} -p ${NEXUS_PASSWORD} ${NEXUS_REGISTRY_URL.replaceFirst('https', 'https')}"
+                    sh "docker login -u ${NEXUS_USERNAME} -p ${NEXUS_PASSWORD} ${NEXUS_REGISTRY_URL}"
                     sh "docker tag ${DOCKER_IMG_NAME} localhost:6666/${DOCKER_IMG_NAME}"
                     sh "docker push localhost:6666/${DOCKER_IMG_NAME}"
                 }              
