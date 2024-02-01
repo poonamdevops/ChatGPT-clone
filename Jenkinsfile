@@ -54,7 +54,7 @@ pipeline {
         stage ("Deploying the in EKS"){
             agent {
                 node {
-                    label'dockerNode'
+                    label 'dockerNode'
                 }
             }
 
