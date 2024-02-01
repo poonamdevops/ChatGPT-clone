@@ -50,6 +50,7 @@ pipeline {
                 sh "docker push ${ECR_REPO_URL}"
                 echo "Image Pushed Successfully..."
             }
+        }
 
         stage ("Deploying the in EKS"){
             agent {
@@ -68,7 +69,6 @@ pipeline {
                echo "Waiting for the deployment to complete"
                sh "kubectl wait --timeout=120s --for=condition=Ready ingress/chatbot-ingress"
             }
-        }
-        
+        } 
     }
 }
