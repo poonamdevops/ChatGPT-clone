@@ -47,6 +47,7 @@ pipeline {
                 echo "Pushing to ECR"
                 sh "docker build -t chatobott-img ."
                 sh "docker tag chatobott-img:latest ${ECR_REPO_URL}"
+                sh "aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 991486635617.dkr.ecr.us-east-1.amazonaws.com"
                 sh "docker push ${ECR_REPO_URL}"
                 echo "Image Pushed Successfully..."
             }
