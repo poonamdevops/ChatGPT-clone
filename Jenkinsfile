@@ -66,9 +66,6 @@ pipeline {
                 
                echo "Applying Kubernetes deployment"
                sh "kubectl apply -f ${REPO_PATH}/K8s/manifest.yaml"
-
-               echo "Waiting for the deployment to complete"
-               sh "kubectl wait --timeout=120s --for=condition=Ready ingress/chatbot-ingress"
             }
         } 
     }
