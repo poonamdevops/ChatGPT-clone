@@ -12,7 +12,7 @@ key = '84mZqDjCLLFHzTcSBITkW3Ut3NB-GWp0qmUhQNt6mXs='
 
 f = Fernet(key)
 
-encrypted_data = b'gAAAAABlBvA2zGxIL8MgQcEvDH0T_sHz8wBtGG1s2opil5MiNC0lGN5P62-YrKsHrZpgEB_ax-Wgyfs29yzsaDQ1daYCpp3u_OMDM0UJKtrKXtLxTkPRQOajioyOLSN2vkNXtptDAc-cF15BZl9kO3ZleQ2xCT0aKQ=='
+encrypted_data = b'gAAAAABlvJekXsimw1sgMoLuR962cFIf7iXA208ZjaCS9xMcVnl3963FAc4Jz0H5ZaaetEF44ADGKdFznq-OcsIAAfvVwBD4vmKFDsR9Ygovh8mHUKnls2pi6wqHPSNxzo-pDMojw4w5oHpdNamCXXFaUHx1hprz7g=='
 
 decrypted_data = f.decrypt(encrypted_data)
 
