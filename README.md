@@ -34,3 +34,7 @@ The service has been exposed on port 80.
 The container is exposed on port 8000.
 
 ![Screenshot 2024-02-02 132937](https://github.com/SANDEEP-NAYAK/django-GPT-3.5-ChatBot/assets/77114339/7fd3ffe9-4411-4b45-b027-e137edab4c8e)
+
+# Jenkins Screenshot
+
+![ss3](https://github.com/SANDEEP-NAYAK/django-GPT-3.5-ChatBot/assets/77114339/b6417de2-ba59-43a4-ba67-fdd98791cd72)
