@@ -1,4 +1,4 @@
-# ChatGPT Clone Using Dhjango and doing its CI/CD
+# ChatGPT Clone Using Django and doing its CI/CD
 
 ## Application Overview
 This is a django based ChatGPT clone Application. It has authentication feature, login, logout, register.
