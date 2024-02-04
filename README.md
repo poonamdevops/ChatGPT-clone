@@ -23,7 +23,7 @@ The image is then tagged accordingly and is pushed into AWS ECR.
 
 Then the EKS cluster has been setup using eksctl command
 
-eg: **eksctl create cluster --name Rinc-cluster --region us-east-1 --nodegroup-name Rinc-nodegroup1 --nodes 2 --nodes-min 2 --nodes-max 3 --node-type t3.xlarge --vpc-public-subnets=subnet-0b50ddaee2708a164,subnet-05f243aea35a74550,subnet-05ea203e9ea864722**
+eg: **eksctl create cluster --name chatbot-cluster --region us-east-1 --nodegroup-name chatbot-nodegroup --nodes 1 --nodes-min 1 --nodes-max 2 --node-type t3.xlarge --vpc-public-subnets= subnet-0e92a978275b1647a, subnet-00b16cfabc976e76e**
 
 And now the manifest.yaml file is deployed automatically onto the cluster via the Jenkins script itself.
 
