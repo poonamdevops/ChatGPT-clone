@@ -42,12 +42,17 @@ kind: Ingress
 metadata:
   name: chatbot-ingress
   annotations:
+    kubernetes.io/ingress.class: alb
     alb.ingress.kubernetes.io/scheme: internet-facing
     alb.ingress.kubernetes.io/target-type: ip
+    alb.ingress.kubernetes.io/healthcheck-protocol: HTTPS
+    alb.ingress.kubernetes.io/healthcheck-path: "/"
+    alb.ingress.kubernetes.io/ssl-policy: ELBSecurityPolicy-TLS-1-1-2017-01
+    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-east-1:991486635617:certificate/c01d4019-4014-4213-a60e-b73031bcad94
 spec:
-  ingressClassName: alb
   rules:
-    - http:
+    - host: "subhampradhan.online"
+      http:
         paths:
           - path: /
             pathType: Prefix
@@ -56,7 +61,3 @@ spec:
                 name: chatbot-service
                 port:
                   number: 80
-
-
-
-#https://www.youtube.com/watch?v=o4QG_kqYvHk&ab_channel=CloudWithRaj
