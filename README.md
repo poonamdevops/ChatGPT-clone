@@ -42,6 +42,6 @@ The container is exposed on port 8000.
 # Added Domain and SSL/TLS 
 Domain was added to the application running inside K8s pods and added TLS/SSL to enhance security between client and the webiste interaction.
 
-Read document https://github.com/SANDEEP-NAYAK/ChatGPT-clone/blob/master/Adding%20domain%20and%20TLS-SSL%20to%20it.docx present in root dir of the repo.
+Read [Adding domain and TLS-SSL to it.docx](https://github.com/SANDEEP-NAYAK/ChatGPT-clone/blob/master/Adding%20domain%20and%20TLS-SSL%20to%20it.docx) for more details.
 
 ChatGPT clone Video: https://youtu.be/qrZGfBBlXpk?si=yWqIigcgMTq8xFwU
