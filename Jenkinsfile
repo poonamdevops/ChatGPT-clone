@@ -6,8 +6,8 @@ pipeline {
         // SHELL_DIR = "/dockerNode/workspace/chatbotApp/nexus_secure"
         ECR_REPO_URL = "991486635617.dkr.ecr.us-east-1.amazonaws.com/chatobott-img:latest"
         KUBE_CONFIG = "/path/to/your/kubeconfig"
-        REPO_PATH = "/dockerNode/workspace/chatbot-pipeline"
         CLUSTER_NAME = "chatbot-cluster"
+        PATH = "/dockerNode/workspace/helmPipeline/K8s"
     }
     
     stages {
@@ -65,9 +65,10 @@ pipeline {
                echo "Updating kubectl configuration for EKS cluster"
                sh "aws eks update-kubeconfig --region us-east-1 --name ${CLUSTER_NAME}"
                
-               sh "helm lint /dockerNode/K8s"
-               sh "helm install chatbot-app /dockerNode/K8s"
-               echo "Applying Kubernetes deployment using helm charts"
+               sh "helm lint ${PATH}"
+               sh "helm install chatbot-app ${PATH}"
+               echo "Applied Kubernetes deployment using helm charts"
+               sh "kubectl get ingress"
                //sh "kubectl apply -f ${REPO_PATH}/K8s/manifest.yaml"
             }
         } 
