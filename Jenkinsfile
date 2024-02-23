@@ -24,35 +24,35 @@ pipeline {
             }
         }
             
-        stage("Build") {
-            agent {
-                node {
-                    label 'dockerNode'
-                }
-            }
-            steps{
-                echo "Building the image"
-                sh "docker build -t ${DOCKER_IMG_NAME} ."
+        // stage("Build") {
+        //     agent {
+        //         node {
+        //             label 'dockerNode'
+        //         }
+        //     }
+        //     steps{
+        //         echo "Building the image"
+        //         sh "docker build -t ${DOCKER_IMG_NAME} ."
                 
-            }
-        }
+        //     }
+        // }
 
-        stage ("Pushing To Elastic Containar Registry"){
-            agent {
-                node {
-                    label 'dockerNode'
-                }
-            }
+        // stage ("Pushing To Elastic Containar Registry"){
+        //     agent {
+        //         node {
+        //             label 'dockerNode'
+        //         }
+        //     }
 
-            steps{
-                echo "Pushing to ECR"
-                sh "docker build -t chatobott-img ."
-                sh "docker tag chatobott-img:latest ${ECR_REPO_URL}"
-                sh "aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 991486635617.dkr.ecr.us-east-1.amazonaws.com"
-                sh "docker push ${ECR_REPO_URL}"
-                echo "Image Pushed Successfully..."
-            }
-        }
+        //     steps{
+        //         echo "Pushing to ECR"
+        //         sh "docker build -t chatobott-img ."
+        //         sh "docker tag chatobott-img:latest ${ECR_REPO_URL}"
+        //         sh "aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 991486635617.dkr.ecr.us-east-1.amazonaws.com"
+        //         sh "docker push ${ECR_REPO_URL}"
+        //         echo "Image Pushed Successfully..."
+        //     }
+        // }
 
         stage ("Deploying in EKS using helm"){
             agent {
