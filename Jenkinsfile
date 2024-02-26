@@ -7,7 +7,7 @@ pipeline {
         ECR_REPO_URL = "991486635617.dkr.ecr.us-east-1.amazonaws.com/chatobott-img:latest"
         // KUBE_CONFIG = "/path/to/your/kubeconfig"
         CLUSTER_NAME = "chatbot-cluster"
-        HELM_PATH = "/dockerNode/workspace/helmPipeline/K8s"
+        HELM_PATH = "/dockerNode/workspace/chatbot-pipeline/K8s"
     }
     
     stages {
