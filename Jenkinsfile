@@ -5,7 +5,7 @@ pipeline {
         DOCKER_IMG_NAME = "aichatbot:$BUILD_ID"
         // SHELL_DIR = "/dockerNode/workspace/chatbotApp/nexus_secure"
         ECR_REPO_URL = "991486635617.dkr.ecr.us-east-1.amazonaws.com/chatobott-img:latest"
-        KUBE_CONFIG = "/path/to/your/kubeconfig"
+        // KUBE_CONFIG = "/path/to/your/kubeconfig"
         CLUSTER_NAME = "chatbot-cluster"
         PATH = "/dockerNode/workspace/helmPipeline/K8s"
     }
@@ -71,6 +71,6 @@ pipeline {
                sh "kubectl get ingress"
                //sh "kubectl apply -f ${REPO_PATH}/K8s/manifest.yaml"
             }
-        } 
+        }
     }
 }
