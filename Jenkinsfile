@@ -33,7 +33,7 @@ pipeline {
 
             steps{
                 echo "Pushing to ECR"
-                sh "docker tag ${DOCKER_IMG_NAME}:latest ${ECR_REPO_URL}"
+                sh "docker tag ${DOCKER_IMG_NAME} ${ECR_REPO_URL}"
                 sh "aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 331523302307.dkr.ecr.ap-south-1.amazonaws.com"
                 sh "docker push ${ECR_REPO_URL}"
                 echo "Image Pushed Successfully..."
