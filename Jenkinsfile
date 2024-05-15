@@ -8,7 +8,7 @@ pipeline {
     }
     
     tools {
-        sonarQubeScanner 'scanthroughsonar' // This should match the name of an actual SonarQube scanner installation in Jenkins
+        sonarQubeScannerhudson.plugins.sonar.SonarRunnerInstallation 'scanthroughsonar' // This should match the name of an actual SonarQube scanner installation in Jenkins
     }
 
     stages {
