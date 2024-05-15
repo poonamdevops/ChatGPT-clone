@@ -27,7 +27,7 @@ pipeline {
             steps{
 
                 def scannerHome = tool 'scanthroughsonar'; // must match the name of an actual scanner installation directory on your Jenkins build agent
-                    withSonarQubeEnv(credentialsId: 'sonar-api') {
+                    withSonarQubeEnv(installationName: 'sonar-server', credentialsId: 'sonar-api') {
                  // If you have configured more than one global server connection, you can specify its name as configured in Jenkins
                         sh "${scannerHome}/bin/sonar-scanner"
                     }
