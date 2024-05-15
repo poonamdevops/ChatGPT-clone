@@ -22,13 +22,11 @@ pipeline {
         stage('SonarQube Analysis') {
 
             steps{
-
-                def scannerHome = tool 'sonar-scanner';
-
-                withSonarQubeEnv() {
-
-                    sh "${scannerHome}/bin/sonar-scanner"
-                }  
+                sonar-scanner \
+                -Dsonar.projectKey=test \
+                -Dsonar.sources=. \
+                -Dsonar.host.url=http://13.235.87.63:9000 \
+                -Dsonar.token=sqp_4245cd1408a6a67ba320875560778f7d92e2f5fe
             }
             
   }
