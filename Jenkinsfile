@@ -18,6 +18,16 @@ pipeline {
                 git credentialsId: 'githubCreds', url: 'https://github.com/SANDEEP-NAYAK/ChatGPT-clone.git', branch: 'master'
             }
         }
+
+        stage('SonarQube Analysis') {
+
+            def scannerHome = tool 'sonar-scanner';
+
+            withSonarQubeEnv() {
+
+                sh "${scannerHome}/bin/sonar-scanner"
+            }
+  }
             
         stage("Build") {
            
@@ -27,6 +37,9 @@ pipeline {
                 
             }
         }
+
+        
+
 
         stage("Pushing To Elastic Containar Registry"){
          
