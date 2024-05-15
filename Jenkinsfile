@@ -7,10 +7,7 @@ pipeline {
         SONAR_PROJECT_KEY = "test" // Replace with your actual project key
     }
     
-    tools {
-        sonarQubeScannerhudson.plugins.sonar.SonarRunnerInstallation 'scanthroughsonar' // This should match the name of an actual SonarQube scanner installation in Jenkins
-    }
-
+    
     stages {
         stage("Clone Code") {
             steps {
