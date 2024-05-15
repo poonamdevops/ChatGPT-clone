@@ -13,7 +13,7 @@ pipeline {
     }
 
     tools {
-        sonarScanner 'scanthroughsonar' // This should match the name of an actual scanner installation directory on your Jenkins build agent
+         sonarQubeScanner 'scanthroughsonar' // This should match the name of an actual scanner installation directory on your Jenkins build agent
     }
     
     stages {
