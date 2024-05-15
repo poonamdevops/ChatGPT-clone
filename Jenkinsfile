@@ -18,19 +18,7 @@ pipeline {
                 git credentialsId: 'githubCreds', url: 'https://github.com/SANDEEP-NAYAK/ChatGPT-clone.git', branch: 'master'
             }
         }
-
-        stage('SonarQube Analysis') {
-
-            steps{
-                sonar-scanner \
-                -Dsonar.projectKey=test \
-                -Dsonar.sources=. \
-                -Dsonar.host.url=http://13.235.87.63:9000 \
-                -Dsonar.token=sqp_4245cd1408a6a67ba320875560778f7d92e2f5fe
-            }
-            
-  }
-            
+       
         stage("Build") {
            
             steps{
