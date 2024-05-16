@@ -50,3 +50,5 @@ ChatGPT clone Video: https://youtu.be/qrZGfBBlXpk?si=yWqIigcgMTq8xFwU
 
 Latest sonarqube installation link: https://medium.com/@pramesh.palkonda18/deploying-sonarqube-on-aws-ec2-a-comprehensive-setup-guide-52150c2d924d
 
+This is how you will be integrating Sonarqube with Jenkinns: https://docs.sonarsource.com/sonarqube/latest/analyzing-source-code/ci-integration/jenkins-integration/key-features/
+
