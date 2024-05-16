@@ -19,6 +19,8 @@ The jenkins have one slave named dockerNode which houses docker and K8s tools re
 
 The code is pulled into the dockerNode and then image is built out of it.
 
+Sonarqube is also added here.
+
 The image is then tagged accordingly and is pushed into AWS ECR.
 
 Then the EKS cluster has been setup using eksctl command
@@ -45,3 +47,6 @@ Domain was added to the application running inside K8s pods and added TLS/SSL to
 Read [Adding domain and TLS-SSL to it.docx](https://github.com/SANDEEP-NAYAK/ChatGPT-clone/blob/master/Adding%20domain%20and%20TLS-SSL%20to%20it.docx) for more details.
 
 ChatGPT clone Video: https://youtu.be/qrZGfBBlXpk?si=yWqIigcgMTq8xFwU
+
+Latest sonarqube installation link: https://medium.com/@pramesh.palkonda18/deploying-sonarqube-on-aws-ec2-a-comprehensive-setup-guide-52150c2d924d
+
