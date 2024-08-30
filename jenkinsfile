@@ -1,1 +1,56 @@
-new
+pipeline {
+    agent any
+
+    environment {
+        // Replace with your ECR repository URL
+        ECR_REPO = '331523302307.dkr.ecr.ap-south-1.amazonaws.com/chatbot'
+        // Docker image name
+        IMAGE_NAME = 'chatgbt-img'
+        AWS_DEFAULT_REGION = 'ap-south-1'
+        BUILD_NUMBER = "${env.BUILD_NUMBER}"
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                // Checkout code from GitHub
+                git branch: 'main', url: 'https://github.com/poonamdevops/ChatGPT-clone.git'
+            }
+        }
+        
+        stage('Build Docker Image') {
+            steps {
+                script {
+                    // Build Docker image and tag it with the build number
+                    docker.build("${IMAGE_NAME}:${BUILD_NUMBER}")
+                }
+            }
+        }
+        
+        stage('Tag and Push to ECR') {
+            steps {
+                script {
+                    def ecrImageName = "${ECR_REPO}/${IMAGE_NAME}:${BUILD_NUMBER}"
+                    
+                    // Login to AWS ECR
+                    withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-credentials-id']]) {
+                        sh 'aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $ECR_REPO'
+                        
+                        // Tag the image
+                        sh "docker tag ${IMAGE_NAME}:${BUILD_NUMBER} ${ecrImageName}"
+                        
+                        // Push the image to ECR
+                        sh "docker push ${ecrImageName}"
+                    }
+                }
+            }
+        }
+    }
+    
+    post {
+        failure {
+            // Handle failure
+            echo 'Build or push failed'
+        }
+    }
+}
