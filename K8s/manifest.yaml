@@ -20,6 +20,8 @@ spec:
           image: 331523302307.dkr.ecr.ap-south-1.amazonaws.com/chatbot:11
           ports:
             - containerPort: 8000
+     imagePullSecrets:
+        - name: ecr-secret       
 
 ---
 
