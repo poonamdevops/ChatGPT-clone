@@ -17,7 +17,7 @@ spec:
       containers:
         - name: chatbot-cont
           imagePullPolicy: Always
-          image: 331523302307.dkr.ecr.ap-south-1.amazonaws.com/chatbot:${BUILD_ID}
+          image: 331523302307.dkr.ecr.ap-south-1.amazonaws.com/chatbot:11
           ports:
             - containerPort: 8000
 
