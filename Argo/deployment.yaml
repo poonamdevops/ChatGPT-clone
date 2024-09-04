@@ -20,13 +20,10 @@ spec:
           imagePullPolicy: Always
           ports:
             - containerPort: 8000
-              protocol: TCP  # Optional, but good practice to specify
+              protocol: TCP
       imagePullSecrets:
         - name: ecr-secret
-     
-
 ---
-
 apiVersion: v1
 kind: Service
 metadata:
@@ -38,9 +35,7 @@ spec:
     - protocol: TCP
       port: 80  
       targetPort: 8000
-
 ---
-
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -56,7 +51,7 @@ metadata:
     # alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-east-1:991486635617:certificate/c01d4019-4014-4213-a60e-b73031bcad94
 spec:
   rules:
-    - host:chatbot.poonamshinde.world
+    - host: chatbot.poonamshinde.world
       http:
         paths:
           - path: /
