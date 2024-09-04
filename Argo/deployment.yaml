@@ -44,15 +44,14 @@ metadata:
     kubernetes.io/ingress.class: alb
     alb.ingress.kubernetes.io/scheme: internet-facing
     alb.ingress.kubernetes.io/target-type: ip
-    alb.ingress.kubernetes.io/healthcheck-protocol: HTTPS
-    alb.ingress.kubernetes.io/healthcheck-port: "443"
+    alb.ingress.kubernetes.io/healthcheck-protocol: HTTP
     alb.ingress.kubernetes.io/healthcheck-path: "/"
     alb.ingress.kubernetes.io/subnets: subnet-01db3b02f92f0f0a1, subnet-0c3c5ace6d4d6393b
-    alb.ingress.kubernetes.io/ssl-policy: ELBSecurityPolicy-TLS-1-1-2017-01
-    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:ap-south-1:331523302307:certificate/53b7ed71-b2d4-49b2-a6e8-01ca4f492b16
+    # alb.ingress.kubernetes.io/ssl-policy: ELBSecurityPolicy-TLS-1-1-2017-01
+    # alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-east-1:991486635617:certificate/c01d4019-4014-4213-a60e-b73031bcad94
 spec:
   rules:
-    - host: chatbot.poonamshinde.world
+    - host:
       http:
         paths:
           - path: /
