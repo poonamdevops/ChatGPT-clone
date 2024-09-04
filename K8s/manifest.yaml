@@ -56,7 +56,7 @@ metadata:
     # alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-east-1:991486635617:certificate/c01d4019-4014-4213-a60e-b73031bcad94
 spec:
   rules:
-    - host:chatbot.poonamshinde.world
+    - host:
       http:
         paths:
           - path: /
