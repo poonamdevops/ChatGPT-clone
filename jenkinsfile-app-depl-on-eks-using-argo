@@ -1,0 +1,101 @@
+pipeline {
+    agent any
+
+    environment {
+        ECR_REPO_URL = '331523302307.dkr.ecr.ap-south-1.amazonaws.com/chatbot'
+        DOCKER_IMG_NAME = 'chatgbot-img'
+        AWS_DEFAULT_REGION = 'ap-south-1'
+    }
+
+    stages {
+        stage('Clean Workspace') {
+            steps {
+                script {
+                    echo "Cleaning workspace before checkout..."
+                    deleteDir() // Removes all files from the workspace
+                }
+            }
+        }
+
+        stage('Checkout') {
+            steps {
+                git branch: 'master', url: 'https://github.com/poonamdevops/ChatGPT-clone.git'
+            }
+        }
+
+        stage('Build Docker Image') {
+            steps {
+                script {
+                    echo "Building Docker image: ${DOCKER_IMG_NAME}:${BUILD_NUMBER}"
+                    sh "docker build -t ${DOCKER_IMG_NAME}:${BUILD_NUMBER} ."
+                }
+            }
+        }
+
+        stage('Push To Elastic Container Registry') {
+            steps {
+                withCredentials([[
+                    $class: 'AmazonWebServicesCredentialsBinding',
+                    credentialsId: 'credential',
+                    accessKeyVariable: 'AWS_ACCESS_KEY_ID',
+                    secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
+                ]]) {
+                    echo "Authenticating and pushing to ECR"
+                    sh "aws ecr get-login-password --region ${AWS_DEFAULT_REGION} | docker login --username AWS --password-stdin ${ECR_REPO_URL}"
+                    sh "docker tag ${DOCKER_IMG_NAME}:${BUILD_NUMBER} ${ECR_REPO_URL}:${BUILD_NUMBER}"
+                    sh "docker push ${ECR_REPO_URL}:${BUILD_NUMBER}"
+                    echo "Image Pushed Successfully..."
+                }
+            }
+        }
+
+        stage('Cleanup Docker Image') {
+            steps {
+                script {
+                    echo "Listing Docker images before cleanup"
+                    sh "docker images"
+
+                    echo "Attempting to remove local Docker images"
+                    try {
+                        sh "docker rmi ${DOCKER_IMG_NAME}:${BUILD_NUMBER} || true"
+                        sh "docker rmi ${ECR_REPO_URL}:${BUILD_NUMBER} || true"
+                    } catch (Exception e) {
+                        echo "Error removing Docker images: ${e.getMessage()}"
+                    }
+
+                    echo "Listing Docker images after cleanup"
+                    sh "docker images"
+
+                    echo "Removing dangling images and cleanup"
+                    sh "docker image prune -f"  // Remove dangling images
+                }
+            }
+        }
+
+        stage('Update GIT') {
+            steps {
+                script {
+                    catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                        withCredentials([usernamePassword(credentialsId: 'git-cred', passwordVariable: 'GIT_TOKEN', usernameVariable: 'GIT_USERNAME')]) {
+                            sh """
+                                git config user.email 'deshmukhp135@gmail.com'
+                                git config user.name 'poonamdevops'
+                                cd /var/lib/jenkins/workspace/Argo-EKS-2/Argo
+                                sed -i 's|331523302307.dkr.ecr.ap-south-1.amazonaws.com/chatbot:.*|331523302307.dkr.ecr.ap-south-1.amazonaws.com/chatbot:${BUILD_NUMBER}|' /var/lib/jenkins/workspace/Argo-EKS-2/Argo/deployment.yaml
+                                git add /var/lib/jenkins/workspace/Argo-EKS-2/Argo/deployment.yaml
+                                git commit -m 'Updated deployment manifest with image tag: ${BUILD_NUMBER}'
+                                git push https://${GIT_USERNAME}:${GIT_TOKEN}@github.com/poonamdevops/ChatGPT-clone HEAD:master
+                            """
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    post {
+        failure {
+            echo 'Build or push failed'
+        }
+    }
+}
