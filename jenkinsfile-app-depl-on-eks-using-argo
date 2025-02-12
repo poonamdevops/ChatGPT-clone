@@ -99,3 +99,13 @@ pipeline {
         }
     }
 }
+
+
+--------------------------------------------------------
+when in git update stage build number is push into deployemnt yaml then it will auto trigger deployment due to Argo cd integration with 
+cluster
+
+Flow- In git jenkispipeline present.
+deployement of k8s should be single folder.
+then when any new image is created tag that image then push into ecr with build number then push that image build 
+number into deployment which is available in git then auto trigger deployment due to argocd integartion.
