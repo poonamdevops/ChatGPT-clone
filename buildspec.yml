@@ -1,0 +1,22 @@
+version: 0.2
+
+phases:
+  pre_build:
+    commands:
+      - echo Logging in to Amazon ECR...
+      - aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 842675979185.dkr.ecr.us-east-2.amazonaws.com
+      - IMAGE_TAG=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
+  build:
+    commands:
+      - echo Build started on `date`
+      - echo Building the Docker image...
+      - docker build -t simple-docker-service-02e5dd09502d .
+      - docker tag simple-docker-service-02e5dd09502d:latest 842675979185.dkr.ecr.us-east-2.amazonaws.com/simple-docker-service-02e5dd09502d:latest
+  post_build:
+    commands:
+      - echo Pushing the Docker image...
+      - docker push 842675979185.dkr.ecr.us-east-2.amazonaws.com/simple-docker-service-02e5dd09502d:latest
+      - echo Writing image definitions file...
+      - printf '[{"name":"<container1>","imageUri":"<your-ecr-uri>:%s"}]' $IMAGE_TAG > imagedefinitions.json
+artifacts:
+  files: imagedefinitions.json
